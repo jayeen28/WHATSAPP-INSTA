@@ -9,7 +9,7 @@ client.on('qr', qr => {
 });
 
 client.on('ready', () => {
-    console.log('client is ready');
+    console.log('[+] Bot is ready.');
 });
 
 client.on('message', msg => {

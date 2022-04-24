@@ -17,7 +17,8 @@ const processPost = async (location) => {
         💌Inbox for price and more details💌
         `;
         const { media } = await client.uploadPhoto({ photo: location, caption });
-        console.log(`[+] https://www.instagram.com/p/${media.code}/`);
+        console.log('[+] Image uploaded to instagram.');
+        console.log(`[+] Post url: https://www.instagram.com/p/${media.code}/`);
     }
     catch (err) {
         console.error(`[+] ${err}`);
