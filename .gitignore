@@ -3,4 +3,5 @@ node_modules
 .wwebjs_auth
 session
 newImage.jpg
+resizedImage.jpg
 cookies.json

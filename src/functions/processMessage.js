@@ -1,4 +1,5 @@
 const fs = require('fs');
+const sharp = require('sharp');
 const processPost = require('./instaPost');
 
 const processMessage = async (data) => {
@@ -8,7 +9,11 @@ const processMessage = async (data) => {
         fs.writeFile('newImage.jpg', fileContent, err => {
             if (err) return console.log('file did not saved');
             console.log('file is save bro.');
-            processPost();
+            sharp('newImage.jpg').resize(1696, 1064).toFile('resizedImage.jpg', (err, info) => {
+                if (err) return console.log('file did not resized');
+                console.log('file is resized');
+                processPost('resizedImage.jpg');
+            });
         })
     }
 }

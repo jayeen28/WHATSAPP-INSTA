@@ -4,7 +4,7 @@ const FileCookieStore = require('tough-cookie-filestore2');
 const cookieStore = new FileCookieStore('./cookies.json');
 const client = new Instagram({ username: process.env.INSTA_USER, password: process.env.INSTA_PASS, cookieStore });
 
-const processPost = async () => {
+const processPost = async (location) => {
     try {
         await client.login();
         const caption = `
@@ -16,7 +16,7 @@ const processPost = async () => {
         4.Contact Number 
         💌Inbox for price and more details💌
         `;
-        const { media } = await client.uploadPhoto({ photo: 'newImage.jpg', caption });
+        const { media } = await client.uploadPhoto({ photo: location, caption });
         console.log(`[+] https://www.instagram.com/p/${media.code}/`);
     }
     catch (err) {
