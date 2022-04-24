@@ -1,15 +1,8 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
+const client = require('./client/client.js');
+require('dotenv').config();
 const qrCode = require('qrcode-terminal');
+const processMessage = require('./functions/processMessage');
 
-const client = new Client(
-    {
-        authStrategy: new LocalAuth({ dataPath: './' }),
-        puppeteer: {
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        }
-    }
-);
 
 client.on('qr', qr => {
     qrCode.generate(qr, { small: true });
@@ -20,8 +13,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    console.log(msg);
-    // client.sendMessage(msg.from, 'Hello I am Mad Falcon[bot]. How can I help you?');
+    if (process.env.TARGET_ID === msg.from) processMessage(msg);
 });
 
 client.initialize();
